@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE-edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MaiMusix - Your One Stop Music Station</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/x-icon" href="icon.png" />
+  <style>
+    body {
+      background-color: #fff;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      color: #000;
+    }
+
+    header {
+      background-color: #4285F4;
+      padding: 10px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    nav ul li {
+      margin-right: 20px;
+    }
+
+    nav ul li:last-child {
+      margin-right: 0;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+      font-size: 18px;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #1DB954;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+    }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #4285F4;
+    font-weight: bold;
+    margin: 0 auto;
+  }
+
+    
+    .brand img {
+      display: block;
+      margin: 0 auto;
+    }
+
+    .logout-button {
+      padding: 10px 20px;
+      background-color: #f00;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    .logout-button:hover {
+      background-color: #f00;
+    }
+
+    main {
+      padding: 20px;
+      text-align: center;
+    }
+
+    #get-stream-section {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #song-name {
+      width: 80%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #4285F4;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    #get-stream-button {
+      padding: 10px 20px;
+      background-color: #4285F4;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+      margin-bottom: 10px;
+    }
+
+    #get-stream-button:hover {
+      background-color: #357AE8;
+    }
+
+    #copy-link-text {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    #stream-now-button {
+      padding: 10px 20px;
+      background-color: #4285F4;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+      margin-bottom: 10px;
+    }
+
+    #stream-now-button:hover {
+      background-color: #357AE8;
+    }
+
+    .dialog-box {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .dialog-box .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    .dialog-box .close-btn:hover {
+      color: #f00;
+    }
+
+    .dialog-box #stream-url-content {
+      text-align: center;
+      font-size: 24px;
+      color: #fff;
+      margin: 20% auto;
+      width: 60%;
+      padding: 20px;
+      background-color: #333;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li class="brand">
+          <img src="https://i.ibb.co/n3VKJLQ/logo.png" alt="MaiMusix" style="width: 150px; height: auto;" />
+          MaiMusix
+        </li>
+      </ul>
+    </nav>
+    <div class="user-info">
+      <button class="logout-button" id="logout-button">Logout</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="get-stream-section">
+      <h2>MaiMusix - Stream High Quality Music For Free</h2>
+      <input type="text" id="song-name" placeholder="Search for your favorite song" />
+      <button id="get-stream-button">Search</button>
+      <p id="copy-link-text">Copy The Link Generated</p>
+      <a href="https://bharadwajpro.github.io/m3u8-player/" target="_blank" id="stream-now-button">Stream Now</a>
+    </div>
+  </main>
+
+  <div id="stream-url-dialog" class="dialog-box">
+    <span id="close-dialog" class="close-btn" onclick="closeDialog()">&times;</span>
+    <p id="stream-url-content"></p>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const songNameInput = document.getElementById('song-name');
+      const getStreamButton = document.getElementById('get-stream-button');
+      const streamUrlDialog = document.getElementById('stream-url-dialog');
+      const streamUrlContent = document.getElementById('stream-url-content');
+      const closeDialogButton = document.getElementById('close-dialog');
+      const logoutButton = document.getElementById('logout-button');
+
+      getStreamButton.addEventListener('click', () => {
+        const songName = songNameInput.value;
+
+        fetch(`/get-stream-url?songName=${songName}`)
+          .then(response => response.text())
+          .then(streamUrl => {
+            if (streamUrl) {
+              streamUrlContent.textContent = streamUrl;
+              streamUrlDialog.style.display = 'block';
+            } else {
+              alert('Failed to fetch audio stream.');
+            }
+          });
+      });
+
+      closeDialogButton.addEventListener('click', () => {
+        streamUrlDialog.style.display = 'none';
+      });
+
+      logoutButton.addEventListener('click', () => {
+        
+      });
+    });
+
+    function closeDialog() {
+      const streamUrlDialog = document.getElementById('stream-url-dialog');
+      streamUrlDialog.style.display = 'none';
+    }
+  </script>
+</body>
+</html>

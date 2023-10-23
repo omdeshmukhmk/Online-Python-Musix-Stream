@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Login - MaiMusix</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body {
+      background-color: #1DB954;
+      background-image: url("https://i.pinimg.com/originals/a4/10/2c/a4102c88e38d11babed2452d9ebd582c.gif");
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background-color: rgba(0, 0, 0, 0.8);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      color: #fff;
+      width: 400px; 
+    }
+    .header {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #1DB954;
+    }
+    .gif {
+      max-width: 100%;
+      height: auto;
+      margin-top: 20px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    input[type="text"],
+    input[type="password"],
+    input[type="submit"],
+    .button {
+      height: 40px;
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 50px;
+      outline: none;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+    input[type="text"],
+    input[type="password"],
+    .input {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      padding-left: 20px;
+    }
+    input[type="submit"],
+    .button {
+      background-color: #87CEEB;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    input[type="submit"]:hover,
+    .button:hover {
+      background-color: #4682B4;
+    }
+    .signup a,
+    .login a {
+      color: #1DB954;
+      text-decoration: none;
+    }
+    .signup a:hover,
+    .login a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">Login</div>
+    <form action="/login" method="POST">
+      <div class="form-group">
+        <input type="text" name="username" class="input" placeholder="Enter your username" required>
+      </div>
+      <div class="form-group">
+        <input type="password" name="password" class="input" placeholder="Enter your password" required>
+      </div>
+      <div class="form-group">
+        <input type="submit" class="button" value="Log In">
+      </div>
+    </form>
+    <div class="signup">
+      <span class="signup">Don't have an account? <a href="/signup">Signup</a></span>
+    </div>
+  </div>
+</body>
+</html>
